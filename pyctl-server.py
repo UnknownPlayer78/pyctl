@@ -17,7 +17,6 @@ pygame.display.set_caption("pyctl")
 HOST = '0.0.0.0'
 PORT = 8193
 
-
 def connection_handler(c,addr):
     global running
     while running:
@@ -43,7 +42,6 @@ while running:
     c, addr = s.accept()
     print(addr, "connected.")
     thread.start_new_thread(connection_handler,(c,addr))
-
 
 s.close()
 pygame.quit()

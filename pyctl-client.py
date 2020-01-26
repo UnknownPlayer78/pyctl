@@ -5,9 +5,6 @@ import ctypes
 HOST = '127.0.0.1'
 PORT = 8193
 
-SendInput = ctypes.windll.user32.SendInput
-
-# C struct redefinitions 
 PUL = ctypes.POINTER(ctypes.c_ulong)
 class KeyBdInput(ctypes.Structure):
     _fields_ = [("wVk", ctypes.c_ushort),
@@ -37,8 +34,6 @@ class Input_I(ctypes.Union):
 class Input(ctypes.Structure):
     _fields_ = [("type", ctypes.c_ulong),
                 ("ii", Input_I)]
-
-# Actuals Functions
 
 def PressKey(hexKeyCode):
     extra = ctypes.c_ulong(0)
@@ -119,12 +114,10 @@ KEYS[121]   = 0x2C # Z
 
 def press(key, state):
     if state == "1" and key != 300:
-        #print(key)
         if PRESSED[key] != state:
             PressKey(KEYS[key])
             PRESSED[key] = state
     elif state == "0" and key != 300:
-        #pass
         if PRESSED[key] != state:
             ReleaseKey(KEYS[key])
             PRESSED[key] = state
